@@ -1,0 +1,58 @@
+#! /bin/bash
+# normaliza o volume de todos os arquivos .mp3 de um diretorio, usando o mp3gain
+
+# vai para o diretório que foi passado no parâmetro $1, onde estão os mp3
+cd $1
+
+# aplica o mp3gain aos arquivos mp3 do diretório passado em $1, com os parâmetros adequados
+mp3gain -r -c -o -d 10.0 ./*.mp3
+
+
+### instruções para o mp3gain ###
+
+#usage: mp3gain [options] <infile> [<infile 2> ...]
+#options:
+#        -v - show version number
+#        -g <i>  - apply gain i to mp3 without doing any analysis
+#        
+#        -l 0 <i> - apply gain i to channel 0 (left channel) of mp3
+#                  without doing any analysis (ONLY works for STEREO mp3s,
+#                  not Joint Stereo mp3s)
+#        
+#        -l 1 <i> - apply gain i to channel 1 (right channel) of mp3
+#        -r - apply Track gain automatically (all files set to equal loudness)
+#        -k - automatically lower Track/Album gain to not clip audio
+#        
+#        -a - apply Album gain automatically (files are all from the same
+#                      album: a single gain change is applied to all files, so
+#                      their loudness relative to each other remains unchanged,
+#                      but the average album loudness is normalized)
+#        
+#        -m <i> - modify suggested MP3 gain by integer i
+#        -d <n> - modify suggested dB gain by floating-point n
+#        -c - ignore clipping warning when applying gain
+#        -o - output is a database-friendly tab-delimited list
+#        
+#        -t - mp3gain writes modified mp3 to temp file, then deletes original 
+#             instead of modifying bytes in original file (default)
+#        
+#        -T - mp3gain directly modifies mp3 file (opposite of -t)
+#        -q - Quiet mode: no status messages
+#        -p - Preserve original file timestamp
+#        -x - Only find max. amplitude of mp3
+#        
+#        -f - Force mp3gain to assume input file is an MPEG 2 Layer III file
+#             (i.e. don't check for mis-named Layer I or Layer II files)
+#        
+#        -? or -h - show this message
+#        -s c - only check stored tag info (no other processing)
+#        -s d - delete stored tag info (no other processing)
+#        -s s - skip (ignore) stored tag info (do not read or write tags)
+#        -s r - force re-calculation (do not read tag info)
+#        -u - undo changes made by mp3gain (based on stored tag info)
+#        
+#        -w - "wrap" gain change if gain+change > 255 or gain+change < 0
+#              (use "-? wrap" switch for a complete explanation)
+#              
+#if you specify -r and -a, only the second one will work
+#if you do not specify -c, the program will stop and ask before applying gain change to a file that might clip

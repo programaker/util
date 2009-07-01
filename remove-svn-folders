@@ -1,0 +1,6 @@
+#! /bin/bash
+### remove recursivamente todas as pastas de svn que estejam dentro de uma determinada pasta ###
+# [parâmetros] 
+# o diretório raíz das pastas .svn
+
+for svn_dir in `find $1 -type d -name .svn`;do rm -R -f -v $svn_dir;done

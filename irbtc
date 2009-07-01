@@ -1,0 +1,3 @@
+#! /bin/bash
+# starts irb with tab completion enabled
+irb --readline -r irb/completion

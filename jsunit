@@ -1,0 +1,19 @@
+#! /bin/bash
+# template de script para executar testes unitarios javascript com jsunit
+# basta modificar as variáveis $test_runner e $test_dir para adaptá-lo ao projeto
+
+test_runner=file:$(pwd)/jsunit/testRunner.html
+test_dir=$(pwd)
+
+if [ $# -gt 0 ]; then
+    # se houver um ou mais parametros na linha de comando, cada um será considerado
+    # o nome de uma pagina de teste a ser aberta - sem o '.html'
+    for test_page in $@; do
+        firefox $test_runner?testpage=$test_dir/$test_page.html &
+    done
+else
+    # se não houver parametros, todas as paginas de teste serão abertas
+    for test_page in `ls $test_dir/*.html`; do
+        firefox $test_runner?testpage=$test_page &
+    done    
+fi

@@ -1,0 +1,6 @@
+#! /bin/bash
+
+# limpa restos de pacotes já removidos do sistema
+for i in `dpkg --list|grep ^rc|awk '{ print $2 }'`; do 
+    dpkg -P $i
+done
