@@ -1,0 +1,15 @@
+#! /bin/bash
+
+# since Firefox 3.0, bookmarks, history and most storage is kept in SQLite databases.
+# as any other database, SQLite databases become fragmented over time and empty spaces appear all around.
+# so, a good way to improve performance is to defragment and trim unused space from these databases.
+
+echo "-----closing firefox..."
+killall -r firefox*
+
+echo "-----defragmenting firefox storage..."
+for file in $(find `find ~/.mozilla/firefox -name *.default` -name *.sqlite); do sqlite3 $file vacuum; done
+
+echo "-----done!"
+firefox &
+
