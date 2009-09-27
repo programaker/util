@@ -11,7 +11,7 @@ if [ $# -eq 1 ]; then
 fi
 
 # vai para o diretório onde estão os mp3
-cd $music_dir
+cd "$music_dir"
 
 # aplica o mp3gain aos arquivos mp3 do diretório passado em $1, com os parâmetros adequados
 mp3gain -r -c -o -d 10.0 ./*.mp3
