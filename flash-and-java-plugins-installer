@@ -1,0 +1,31 @@
+#! /bin/bash
+
+FLASH_PLUGIN_HOME=$HOME/Applications/flash-player
+
+# the libnpjp2.so is the "new generation" of java plugin. the classic one, libjavaplugin_oji.so, doesn't work in firefox 3.6
+JAVA_PLUGIN_HOME=$JAVA_HOME/jre/lib/i386
+
+
+# firefox
+cd $HOME/Applications/firefox/plugins
+ln -s $JAVA_PLUGIN_HOME/libnpjp2.so libnpjp2.so
+ln -s $FLASH_PLUGIN_HOME/libflashplayer.so libflashplayer.so
+
+
+# chrome - the plugins folder doesn't exists by default. we have to create it if abscent
+cd /opt/google/chrome
+
+if [ ! -d "plugins" ]; then
+    sudo mkdir plugins
+fi
+
+cd plugins
+sudo ln -s $JAVA_PLUGIN_HOME/libnpjp2.so libnpjp2.so
+ln -s $FLASH_PLUGIN_HOME/libflashplayer.so libflashplayer.so
+
+
+# opera
+cd /usr/lib/opera/plugins
+sudo ln -s $JAVA_PLUGIN_HOME/libnpjp2.so libnpjp2.so
+ln -s $FLASH_PLUGIN_HOME/libflashplayer.so libflashplayer.so
+
